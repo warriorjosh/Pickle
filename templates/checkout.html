@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Homemade Pickles & Snacks</title>
+    <style>
+        :root {
+            --primary: #4CAF50; /* Green from veg-pickles */
+            --secondary: #FF9800; /* Orange from price tags */
+            --light: #f9f9f9;
+            --dark: #212121;
+            --danger: #f44336;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .checkout-form {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .order-summary {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+        .form-section {
+            margin-bottom: 2rem;
+        }
+        .form-section h3 {
+            color: var(--primary);
+            margin-top: 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            flex: 1;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .payment-methods {
+            margin-top: 1rem;
+        }
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .payment-method input {
+            margin-right: 0.5rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #3e8e41;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .item-info {
+            flex: 2;
+        }
+        .item-price {
+            flex: 1;
+            text-align: right;
+            font-weight: bold;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+        }
+        .total {
+            font-weight: bold;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Checkout</h1>
+        <p>Complete your purchase</p>
+    </header>
+
+    <div class="container">
+        <div class="checkout-container">
+            <div class="checkout-form">
+                <h2>Shipping Information</h2>
+                
+                <div class="form-section">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">ZIP Code</label>
+                            <input type="text" id="zip" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="credit-card" name="payment" checked>
+                            <label for="credit-card">Credit Card</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="paypal" name="payment">
+                            <label for="paypal">PayPal</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="cod" name="payment">
+                            <label for="cod">Cash on Delivery</label>
+                        </div>
+                    </div>
+                    
+                    <div id="credit-card-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date</label>
+                                <input type="text" id="expiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Order Notes (optional)</label>
+                    <textarea id="notes" rows="4"></textarea>
+                </div>
+            </div>
+            
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div id="order-items">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+                
+                <div id="order-summary">
+                    <!-- Order summary will be dynamically inserted here -->
+                </div>
+                
+                <button class="btn" onclick="placeOrder()">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Homemade Pickles & Snacks. All rights reserved.</p>
+    </footer>
+
+    <script>
+    // ... existing validation code ...
+
+    function placeOrder() {
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const address = document.getElementById('address').value;
+        const city = document.getElementById('city').value;
+        const state = document.getElementById('state').value;
+        const zip = document.getElementById('zip').value;
+        const phone = document.getElementById('phone').value;
+
+        if (!firstName || !lastName || !address || !city || !state || !zip || !phone) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        // Get current cart items
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Store cart items for order confirmation page
+        localStorage.setItem('lastOrderItems', JSON.stringify(cartItems));
+
+        // Redirect to confirmation page
+        window.location.href = 'order-confirmation.html';
+
+        // Clear cart after successful order (after redirecting, so the next page can read it)
+        localStorage.setItem('cart', JSON.stringify([]));
+    }
+</script>
+</body>
+</html>

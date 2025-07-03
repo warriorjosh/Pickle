@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - SpiceJar</title>
+    <link rel="icon" type="image/png" href="../static/images/5110473.png">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; }
+        .container { max-width: 800px; margin: 50px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #4CAF50; margin-bottom: 20px; }
+        .order-summary { text-align: left; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+        .order-summary h2 { color: #212121; margin-bottom: 15px; }
+        .order-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; }
+        .order-item:last-child { border-bottom: none; }
+        .order-item span:first-child { font-weight: bold; }
+        .order-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; margin-top: 20px; padding-top: 10px; border-top: 2px solid #4CAF50; }
+        .button-group { margin-top: 30px; }
+        .button-group a { display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; margin: 0 10px; transition: background-color 0.3s; }
+        .button-group a:hover { background-color: #388E3C; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Order Placed Successfully!</h1>
+        <p>Thank you for your purchase. Your order has been confirmed.</p>
+
+        <div class="order-summary">
+            <h2>Your Order Details</h2>
+            <div id="ordered-items">
+                </div>
+            <div class="order-total">
+                <span>Total Paid</span>
+                <span id="final-total">₹0</span>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="home.html">Continue Shopping</a>
+            <a href="account.html#order-history">View Order History</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderedItemsContainer = document.getElementById('ordered-items');
+            const finalTotalSpan = document.getElementById('final-total');
+            let totalAmount = 0;
+
+            const lastOrderItems = JSON.parse(localStorage.getItem('lastOrderItems'));
+
+            if (lastOrderItems && lastOrderItems.length > 0) {
+                lastOrderItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('order-item');
+                    const itemPrice = parseFloat(item.price) * parseInt(item.quantity);
+                    totalAmount += itemPrice;
+                    itemElement.innerHTML = `
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>₹${itemPrice.toFixed(2)}</span>
+                    `;
+                    orderedItemsContainer.appendChild(itemElement);
+                });
+                finalTotalSpan.textContent = `₹${totalAmount.toFixed(2)}`;
+                // Optionally clear lastOrderItems after displaying, if it's a one-time view
+                // localStorage.removeItem('lastOrderItems');
+            } else {
+                orderedItemsContainer.innerHTML = '<p>No items found for this order.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

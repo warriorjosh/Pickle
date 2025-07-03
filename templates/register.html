@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Konaseema Ruchulu</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --secondary: #ffa502;
+            --dark: #2f3542;
+            --light: #f1f2f6;
+            --success: #2ed573;
+            --info: #1e90ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        /* Auth Container */
+        .auth-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .auth-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .auth-header p {
+            color: #666;
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .auth-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .auth-form input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .form-footer p {
+            margin-top: 15px;
+            color: #666;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #ddd;
+            padding: 30px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-col h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 30px 20px;
+                margin: 30px 20px;
+            }
+            
+            .auth-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/128/5110/5110473.png" alt="SpiceJar Logo">
+                <h1>SpiceJar</h1>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Register Form -->
+    <div class="auth-container">
+        <div class="auth-header">
+            <h2>Create Account</h2>
+            <p>Join SpiceJar to start shopping our artisanal pickles and snacks</p>
+        </div>
+        
+        <form class="auth-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" required>
+            </div>
+            
+            <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+    <input type="checkbox" id="terms" required style="margin: 0; width: auto;">
+    <label for="terms" style="display: inline; font-weight: normal; margin: 0;">I agree to the <a href="#" style="color: var(--primary);">Terms & Conditions</a> and <a href="#" style="color: var(--primary);">Privacy Policy</a></label>
+</div>
+            
+            <button type="submit" class="btn">Create Account</button>
+            
+            <div class="form-footer">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>SpiceJar</h3>
+                <p>Artisanal pickles and snacks crafted with traditional recipes and the finest ingredients.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Order Tracking</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 SpiceJar. All Rights Reserved.</p>
+        </div>
+    </footer>
+   <script>
+    document.querySelector('.auth-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const firstName = document.getElementById('regFirstName').value;
+        const lastName = document.getElementById('regLastName').value;
+        const email = document.getElementById('regEmail').value;
+        const phone = document.getElementById('regPhone').value;
+        const password = document.getElementById('regPassword').value;
+
+        // Simulate registration by storing in localStorage (for client-side demo)
+        const newUser = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone,
+            password: password // Storing password client-side is INSECURE for real apps
+        };
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+        sessionStorage.setItem('isLoggedIn', 'true'); // Simulate login after registration
+        alert('Registration successful and logged in!');
+        window.location.href = 'home.html'; // Redirect to homepage
+    });
+</script>
+**Important:** Ensure your `register.html` form has input fields with `id="regFirstName"`, `id="regLastName"`, `id="regEmail"`, `id="regPhone"`, and `id="regPassword"`.
+
+### 3. Modify `auth.js`
+
+**Replace the entire content of `auth.js` with this code:**
+
+This `auth.js` will rely on `sessionStorage` for checking the login status and managing UI elements based on it. It will also handle fetching user data for the account page from `localStorage`.
+
+```javascript
+// auth.js for client-side only authentication
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initial check on page load
+    checkAuthStatus();
+
+    // Add event listeners to protected links (e.g., "My Account", "Checkout")
+    // This will redirect to login if not logged in
+    document.querySelectorAll('[data-protected]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (!isLoggedIn()) {
+                e.preventDefault();
+                // Redirect to login.html if not logged in
+                window.location.href = 'login.html';
+            }
+        });
+    });
+
+    // Handle logout for elements with class 'logout-link'
+    document.querySelectorAll('.logout-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            sessionStorage.removeItem('isLoggedIn'); // Clear login flag
+            localStorage.removeItem('currentUser'); // Clear user data
+            alert('You have been logged out.');
+            window.location.href = 'index.html'; // Redirect to public index page
+        });
+    });
+});
+
+// Checks if the user is considered "logged in" based on sessionStorage
+function isLoggedIn() {
+    return sessionStorage.getItem('isLoggedIn') === 'true';
+}
+
+// Updates UI elements based on login status
+function checkAuthStatus() {
+    if (isLoggedIn()) {
+        document.body.classList.add('logged-in'); // Add class to body for CSS styling if needed
+        updateUIForLoggedInUser();
+
+        // If on the account page, load user data
+        if (window.location.pathname.includes('account.html')) {
+            const userData = JSON.parse(localStorage.getItem('currentUser'));
+            if (userData) {
+                // Update profile display
+                document.querySelector('.account-profile h3').textContent = `${userData.firstName} ${userData.lastName}`;
+                document.querySelector('.account-profile p').textContent = userData.email;
+
+                // Update account details form
+                document.getElementById('first-name').value = userData.firstName;
+                document.getElementById('last-name').value = userData.lastName;
+                document.getElementById('email').value = userData.email;
+                document.getElementById('phone').value = userData.phone;
+
+                // Update address cards with user's name
+                document.querySelectorAll('.address-card h3').forEach(el => {
+                    el.textContent = `${userData.firstName} ${userData.lastName}`;
+                });
+            } else {
+                // If isLoggedIn but no currentUser data, log out or redirect
+                sessionStorage.removeItem('isLoggedIn');
+                window.location.href = 'login.html';
+            }
+        }
+    } else {
+        document.body.classList.remove('logged-in');
+        updateUIForLoggedOutUser();
+    }
+}
+
+// Functions to modify UI for logged-in/logged-out states
+function updateUIForLoggedInUser() {
+    const loginLinks = document.querySelectorAll('.login-link'); // Links like "Login" in header
+    const logoutLinks = document.querySelectorAll('.logout-link'); // Links like "Logout"
+    const authButtons = document.querySelectorAll('.auth-button'); // Buttons that switch between Login/My Account
+
+    loginLinks.forEach(link => link.style.display = 'none');
+    logoutLinks.forEach(link => link.style.display = 'block');
+
+    authButtons.forEach(button => {
+        button.textContent = 'My Account';
+        button.href = 'account.html'; // Link to client-side account page
+    });
+}
+
+function updateUIForLoggedOutUser() {
+    const loginLinks = document.querySelectorAll('.login-link');
+    const logoutLinks = document.querySelectorAll('.logout-link');
+    const authButtons = document.querySelectorAll('.auth-button');
+
+    loginLinks.forEach(link => link.style.display = 'block');
+    logoutLinks.forEach(link => link.style.display = 'none');
+
+    authButtons.forEach(button => {
+        button.textContent = 'Login';
+        button.href = 'login.html'; // Link to client-side login page
+    });
+}
+</body>
+</html>
